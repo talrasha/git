@@ -78,13 +78,10 @@ int cap_object_info(struct repository *r, struct strvec *keys,
 		    struct packet_reader *request)
 {
 	struct packet_writer writer;
-	packet_writer_init(&writer, 1);
-	int parsed_header;
 	struct requested_info info;
-
 	struct string_list oid_str_list = STRING_LIST_INIT_DUP;
 
-	parsed_header = 0;
+	packet_writer_init(&writer, 1);
 	while (packet_reader_read(request) == PACKET_READ_NORMAL) {
 		if (!strcmp("size", request->line)) {
 			info.size = 1;
